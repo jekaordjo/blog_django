@@ -1,0 +1,59 @@
+{
+  "python.terminal.useEnvFile": true,
+  // --- 1. Интерпретатор Python и Pylance ---
+  // "python.defaultInterpreterPath": ".venv/Scripts/python.exe",
+  "python.languageServer": "Pylance",
+  "python.analysis.typeCheckingMode": "basic",
+
+  // --- 2. Всплывающие подсказки типов (Inlay Hints) от Pylance ---
+  "editor.inlayHints.enabled": "on",
+  "python.analysis.inlayHints.variableTypes": true,
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.inlayHints.callArgumentNames": "partial",
+  "python.analysis.inlayHints.pytestParameters": true,
+
+  // --- 3. Форматирование, линтинг и сортировка импортов через Ruff ---
+  // "ruff.configuration": "pyproject.toml",
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "explicit",
+      "source.organizeImports.ruff": "explicit"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+
+  // --- 4. Ассоциация шаблонов Django и Emmet (исправлена маска путей) ---
+  "files.associations": {
+    "**/templates/**/*.html": "django-html"
+  },
+  "emmet.includeLanguages": {
+    "django-html": "html"
+  },
+
+  // --- 5. Форматирование Django HTML через djLint ---
+  "[django-html]": {
+    "editor.defaultFormatter": "monosans.djlint",
+    "editor.formatOnSave": true
+  },
+  "djlint.useVenv": false,
+  "djlint.executablePath": ".venv/Scripts/djlint.exe",
+
+  // --- 6. Prettier для остальных файлов ---
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "recommendations": [
+    "batisteo.vscode-django",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-complete-tag",
+    "formulahendry.auto-rename-tag",
+    "naumovs.color-highlight",
+    "monosans.djlint",
+    "usernamehw.errorlens",
+    "tamasfe.even-better-toml",
+    "oderwat.indent-rainbow",
+    "esbenp.prettier-vscode",
+    "ms-python.vscode-pylance",
+    "ms-python.python",
+    "ms-python.debugpy",
+    "ms-python.vscode-python-envs",
+    "charliermarsh.ruff",
+    "shardulm94.trailing-spaces",
+    "vscode-icons-team.vscode-icons"
+  ]
+}
