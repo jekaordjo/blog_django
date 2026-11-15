@@ -1,0 +1,49 @@
+[project]
+name = "blog-djn"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "jeka", email = "jeka.ordjo@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "django>=6.1.2",
+    "django-environ>=0.14.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+# extend-exclude = ["**/migrations/*.py"]
+
+[tool.ruff.lint]
+select = [
+    "E", # Ошибки стилевого оформления (pycodestyle)
+    "W",  # pycodestyle warnings
+    "F", # Логические ошибки (Pyflakes)
+    "I", # Автоматическая сортировка импортов (isort)
+    "DJ", # Специфические правила для проверки Django-кода (flake8-django)
+    "UP" # Автоматическое обновление устаревшего синтаксиса (pyupgrade)
+]
+
+[tool.djlint]
+profile = "django"
+indent = 4
+max_line_length = 120
+preserve_blank_lines = true
+ignore = "H006,H021"
+
+# Рекомендуется отключить форматирование встроенных JS/CSS во избежание конфликтов с {% %}
+format_css = false
+format_js = false
+
+# Дополнительные полезные Best Practice настройки:
+close_void_tags = true                 # Автоматически закрывать одиночные теги (например, <meta ... />)
+format_attribute_template_tags = true  # Аккуратно форматировать теги Django внутри HTML-атрибутов
+
+[dependency-groups]
+dev = [
+    "djlint>=1.46.4",
+    "ruff>=0.16.10",
+]
