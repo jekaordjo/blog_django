@@ -66,6 +66,23 @@
         <footer class="border-top">
             <div class="container py-4 text-body-secondary small">© {% now "Y" %} Jeka</div>
         </footer>
+        <button id="back-to-top"
+                class="btn btn-primary back-to-top"
+                type="button"
+                aria-label="Наверх">
+            <svg aria-hidden="true"
+                 width="20"
+                 height="20"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+                <path d="M12 19V5M5 12l7-7 7 7" />
+            </svg>
+        </button>
+        <script src="{% static 'blog/js/back-to-top.js' %}" defer></script>
         <script src="{% static 'vendor/bootstrap/5.3.9/js/bootstrap.bundle.min.js' %}"
                 defer></script>
     </body>
