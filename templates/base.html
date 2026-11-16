@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{% block title %}blog_djn{% endblock title %}</title>
+        <meta name="description"
+              content="{% block description %}Новости технологий, Python и Django.{% endblock description %}" />
+        <script src="{% static 'blog/js/theme.js' %}"></script>
+        <link rel="stylesheet"
+              href="{% static 'vendor/bootstrap/5.3.9/css/bootstrap.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'blog/css/pygments-light.css' %}" />
+        <link rel="stylesheet" href="{% static 'blog/css/pygments-dark.css' %}" />
+        <link rel="stylesheet" href="{% static 'blog/css/site.css' %}" />
+    </head>
+    <body class="d-flex flex-column min-vh-100">
+        <a class="visually-hidden-focusable position-absolute p-2"
+           href="#content">Перейти к содержимому</a>
+        <header class="border-bottom">
+            <nav class="navbar navbar-expand-sm">
+                <div class="container">
+                    <a class="navbar-brand site-brand" href="{% url 'blog:post_list' %}">blog_djn</a>
+                    <button class="navbar-toggler"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#main-menu"
+                            aria-controls="main-menu"
+                            aria-expanded="false"
+                            aria-label="Открыть меню">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="main-menu">
+                        <ul class="navbar-nav ms-auto align-items-sm-center gap-sm-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'blog:post_list' %}">Статьи</a>
+                            </li>
+                            <li class="nav-item">
+                                <button id="theme-toggle"
+                                        class="btn btn-outline-secondary d-inline-flex align-items-center justify-content-center"
+                                        style="width: 44px;
+                                               height: 44px"
+                                        type="button"
+                                        aria-label="Переключить тему">
+                                    <svg aria-hidden="true"
+                                         width="20"
+                                         height="20"
+                                         viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor"
+                                         stroke-width="2">
+                                        <circle cx="12" cy="12" r="9" />
+                                        <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" />
+                                    </svg>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main id="content" class="flex-grow-1">
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <footer class="border-top">
+            <div class="container py-4 text-body-secondary small">© {% now "Y" %} Jeka</div>
+        </footer>
+        <script src="{% static 'vendor/bootstrap/5.3.9/js/bootstrap.bundle.min.js' %}"
+                defer></script>
+    </body>
+</html>

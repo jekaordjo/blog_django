@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}
+    {% if current_category %}
+        {{ current_category.name }} — blog_djn
+    {% elif current_tag %}
+        {{ current_tag.name }} — blog_djn
+    {% else %}
+        blog_djn — новости технологий, Python и Django
+    {% endif %}
+{% endblock title %}
+{% block content %}
+    <div class="container py-5">
+        {% if current_category %}
+            <h1 class="display-5 fw-bold mb-4">Рубрика: {{ current_category.name }}</h1>
+        {% elif current_tag %}
+            <h1 class="display-5 fw-bold mb-4">Тег: {{ current_tag.name }}</h1>
+        {% else %}
+            <h1 class="display-5 fw-bold mb-2">Новости технологий, Python и Django</h1>
+            <p class="lead text-body-secondary mb-4">Короткие разборы релизов, инструментов и приёмов из практики.</p>
+        {% endif %}
+        <div class="row gx-5">
+            <section class="col-lg-8">
+                <div class="border-top">
+                    {% for post in page_obj %}
+                        <article class="post-card">
+                            <a class="chip" href="{{ post.category.get_absolute_url }}">{{ post.category.name }}</a>
+                            <h2 class="h3 fw-semibold mt-2 mb-2">
+                                <a class="stretched-link" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                            </h2>
+                            <p class="mb-2">{{ post.summary }}</p>
+                            <p class="text-body-secondary small mb-0">
+                                <time datetime="{{ post.published_at|date:'c' }}">{{ post.published_at|date:"j E Y" }}</time>
+                                · {{ post.reading_time }} мин
+                            </p>
+                        </article>
+                    {% empty %}
+                        <p class="py-4 text-body-secondary">Статей пока нет.</p>
+                    {% endfor %}
+                </div>
+                {% if is_paginated %}
+                    <nav aria-label="Страницы" class="mt-4">
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Назад</a>
+                                </li>
+                            {% endif %}
+                            {% for number in page_obj.paginator.page_range %}
+                                <li class="page-item{% if number == page_obj.number %} active{% endif %}">
+                                    <a class="page-link"
+                                       href="?page={{ number }}"
+                                       {% if number == page_obj.number %}aria-current="page"{% endif %}>{{ number }}</a>
+                                </li>
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Дальше</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            </section>
+            <aside class="col-lg-4 pt-lg-4 mt-4 mt-lg-0">
+                {% if categories %}
+                    <h2 class="h6 text-uppercase text-body-secondary mb-3">Рубрики</h2>
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        {% for category in categories %}
+                            <a class="chip"
+                               href="{{ category.get_absolute_url }}">{{ category.name }} · {{ category.posts_count }}</a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if tags %}
+                    <h2 class="h6 text-uppercase text-body-secondary mb-3">Теги</h2>
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for tag in tags %}<a class="chip"
+                                                href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% endfor %}
+                    </div>
+                {% endif %}
+            </aside>
+        </div>
+    </div>
+{% endblock content %}
