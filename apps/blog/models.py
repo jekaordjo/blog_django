@@ -22,6 +22,11 @@ def render_markdown(text):
     return nh3.clean(html, attributes=ALLOWED_ATTRIBUTES)
 
 
+class PostQuerySet(models.QuerySet):
+    def published(self):
+        return self.filter(status="published", published_at__lte=timezone.now())
+
+
 class Category(models.Model):
     """
     Category Post
@@ -89,6 +94,8 @@ class Post(models.Model):
     published_at = models.DateTimeField(null=True, blank=True, verbose_name="Время публикации")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Время добавления")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Время обновления")
+
+    objects = PostQuerySet.as_manager()
 
     class Meta:
         db_table = "blog_post"
